@@ -62,10 +62,9 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=content))
 
 #Work Experience
-if text == "Jessi的經驗":
-    content = works()
-        reply_text = "[富邦證券] %0D%0A 電子交易科 股票分析預測實習生%0D%0A 2018.02-2018.06 %0D%0A [丹麥交換]%0D%0A AARHUS UNIVERSITY%0D%0A2018.08-2019.01"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text= reply_text))
+    if text == "Jessi的經驗":
+        content = "[富邦證券] %0D%0A 電子交易科 股票分析預測實習生%0D%0A 2018.02-2018.06 %0D%0A Github: https://github.com/chiehhsi/Tensorflow/blob/master/TSMC-co.ipynb %0D%0A [丹麥交換]%0D%0A AARHUS UNIVERSITY%0D%0A2018.08-2019.01"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text= content))
 
 #Skills        
     if text == "Jessi的技能":
