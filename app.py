@@ -56,19 +56,19 @@ def handle_message(event):
                     actions = [
                         MessageTemplateAction(
                             label = '基本訊息',
-                            text = '基本訊息',
+                            text = '基本訊息'
                         ),
                         MessageTemplateAction(
                             label = '工作經驗',
-                            text = '工作經驗',
+                            text = '工作經驗'
                         ),
                         MessageTemplateAction(
                             label = '技能專長',
-                            text = '技能專長',
+                            text = '技能專長'
                         ),
                         MessageTemplateAction(
                             label = '興趣',
-                            text = '興趣',
+                            text = '興趣'
                         ),
                         ]
                 )
