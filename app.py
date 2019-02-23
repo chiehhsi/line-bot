@@ -88,7 +88,7 @@ def handle_message(event):
     text = event.message.text
 
 #Profile photo
-    if text == "What does Jessi Looks Like":
+    if text == "Jessi Looks Like":
         image_message = ImageSendMessage(original_content_url='https://imgur.com/OZ7vuKO', preview_image_url= 'https://imgur.com/OZ7vuKO')
         line_bot_api.reply_message(event.reply_token, image_message)
 
@@ -122,18 +122,19 @@ def handle_message(event):
     if text == "我想看廢文":
         content = ptt_hot()
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=content))
+
 #Introduce Jessi
     if text == "介紹Jessi":
         buttons_template = TemplateSendMessage(
                 alt_text = 'Self_intro template',
                 template = ButtonsTemplate(
                     title ='Something about Jessi',
-                    text = 'Check it out',
+                    text = 'All I know',
                     thumbnail_image_url='https://i.imgur.com/xQF5dZT.jpg',
                     actions = [
                         MessageTemplateAction(
-                            label = 'What does Jessi Look Like',
-                            text = 'What does Jessi Look Like'
+                            label = 'Jessi Looks Like',
+                            text = 'Jessi Looks Like'
                             ),
                         MessageTemplateAction(
                             label = 'Jessi是誰',
@@ -151,6 +152,7 @@ def handle_message(event):
                     )
                 )
         line_bot_api.reply_message(event.reply_token, buttons_template)
+
     else :
         carousel_template_message = TemplateSendMessage(
                 alt_text = '目錄 template',
