@@ -5,11 +5,11 @@ import configparser
 from flask import Flask, request, abort
 
 from linebot import (
-    LineBotApi, WebhookHandler
-)
+        LineBotApi, WebhookHandler
+        )
 from linebot.exceptions import (
-    InvalidSignatureError
-)
+        InvalidSignatureError
+        )
 from linebot.models import *
 
 app = Flask(__name__)
@@ -50,50 +50,77 @@ def handle_message(event):
     print("event.reply_token:", event.reply_token)
     print("event.message.text:", event.message.text)
     text = event.message.text
-       ##reply_text = "Hello"
-        ##line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_text))
 
-    if text == "基本訊息":
-        content =  profile()
+#Profile photo
+    if text == "How do Jessi Look":
+        image_message = ImageSendMessage(original_content_url='https://drive.google.com/file/d/1TtCrL2qUuiKX1_Dpy6tkF_FLvcdXiXis/view?usp=sharing', preview_content_url= 'https://drive.google.com/file/d/1TtCrL2qUuiKX1_Dpy6tkF_FLvcdXiXis/view?usp=sharing')
+        line_bot_api.reply_message(event.reply_token, image_message)
+
+#Profile info
+    if text == "Jessi是誰":
+        content = "林倢希\n 國立政治大學 資訊科學系四年級\n Email:j4500123@gmail.com\n 電話:0975241136"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=content))
-        
-    if text == "工作經驗":
-        reply_text = "NCCU"
+
+#Work Experience
+if text == "Jessi的經驗":
+    content = works()
+        reply_text = "[富邦證券]\n 電子交易科 股票分析預測實習生\n 2018.02-2018.06\n Github: https://github.com/chiehhsi/Tensorflow/blob/master/TSMC-co.ipynb\n [丹麥交換]\n AARHUS UNIVERSITY\n 2018.08-2019.01"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text= reply_text))
-        
-    if text == "技能專長":
-        reply_text = "C"
+
+#Skills        
+    if text == "Jessi的技能":
+        reply_text = "[中文] 精通\n [英文] 精通\n [韓文] 良好\n"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text= reply_text))
-    
+
+    if text == "Thank you"||"Thanks" :
+        reply_text = "Tell me if you want to know about Jessi"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_text))
+    if text == "Bye":
+        line_bot_api.reply_message(event.reply_token, StickerSendMessage(package_id=1, sticker_id=408))
+
     else:
         buttons_template = TemplateSendMessage(
                 alt_text = 'Self_intro template',
                 template = ButtonsTemplate(
                     title ='Something about Jessi',
-                    text = 'check it out',
+                    text = 'Check it out',
+                    thumbnail_image_url='https://i.imgur.com/kzi5kKy.jpg',
                     actions = [
                         MessageTemplateAction(
-                            label = '基本訊息',
-                            text = '基本訊息'
-                        ),
+                            label = 'How do Jessi Look',
+                            text = 'How do Jessi Look?'
+                            ),
                         MessageTemplateAction(
-                            label = '工作經驗',
-                            text = '工作經驗'
-                        ),
+                            label = 'Jessi是誰',
+                            text = 'Jessi是誰'
+                            ),
                         MessageTemplateAction(
-                            label = '技能專長',
-                            text = '技能專長'
-                        ),
+                            label = 'Jessi的經驗',
+                            text = 'Jessi的經驗'
+                            ),
                         MessageTemplateAction(
-                            label = '興趣',
-                            text = '興趣'
-                        ),
+                            label = 'Jessi的技能',
+                            text = 'Jessi的技能'
+                            ),
                         ]
+                    )
                 )
-            )
         line_bot_api.reply_message(event.reply_token, buttons_template)
+
+@handler.add(MessageEvent, message=StickerMessage)
+def handle_sticker_message(event):
+    print("package_id:", event.message.package_id)
+    print("sticker_id:", event.message.sticker_id)
+     # ref. https://developers.line.me/media/messaging-api/sticker_list.pdf
+    sticker_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 21, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 119, 120, 121, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 401, 402, 403, 404, 405, 406, 407, 408, 410, 411, 412, 414, 415, 416, 417, 419, 420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430]
+    index_id = random.randint(0, len(sticker_ids) - 1)
+    sticker_id = str(sticker_ids[index_id])
+    print(index_id)
+    sticker_message = StickerSendMessage( package_id='1', sticker_id=sticker_id)
+    line_bot_api.reply_message(event.reply_token,sticker_message)
+
 
 import os
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+port = int(os.environ.get('PORT', 5000))
+app.run(host='0.0.0.0', port=port)
