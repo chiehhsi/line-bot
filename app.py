@@ -43,11 +43,10 @@ def callback():
 def handle_message(event):
     print("event.reply_token:", event.reply_token)
     print("event.message.text:", event.message.text)
-    if event.message.text == "Hi":
-        message ="Hello"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=message))
-        return 0
-    if event.message.text == "Hi":
+    text = event.message.text
+    if text == "Hi":
+        reply_text = "Hello"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text="Hello"))
         buttons_template = TemplateSendMessage(
                 alt_text = 'Self_intro template',
                 template = ButtonsTemplate(
