@@ -50,25 +50,25 @@ def handle_message(event):
         buttons_template = TemplateSendMessage(
                 alt_text = 'Self_intro template',
                 template = ButtonsTemplate(
-                    title ='Something about Jessi'
-                    text = 'check it out'
+                    title ='Something about Jessi',
+                    text = 'check it out',
                     thumbnail_image_url ='https://i.imgur.com/xQF5dZT.jpg'
                     actions = [
                         MessageTemplateAction(
-                            label = '基本訊息'
-                            text = '基本訊息'
+                            label = '基本訊息',
+                            text = '基本訊息',
                         ),
                         MessageTemplateAction(
-                            label = '工作經驗'
-                            text = '工作經驗'
+                            label = '工作經驗',
+                            text = '工作經驗',
                         ),
                         MessageTemplateAction(
-                            label = '技能專長'
-                            text = '技能專長'
+                            label = '技能專長',
+                            text = '技能專長',
                         ),
                         MessageTemplateAction(
-                            label = '興趣'
-                            text = '興趣'
+                            label = '興趣',
+                            text = '興趣',
                         ),
                         ]
                 )
