@@ -2,7 +2,7 @@ import requests
 import re
 import random
 import configparser
-from bs4 import BeautifulSoup
+import BeautifulSoup
 from flask import Flask, request, abort
 from imgurpython import ImgurClient
 
@@ -196,7 +196,7 @@ def handle_message(event):
                     )
                 )
 
-        @handler.add(MessageEvent, message=StickerMessage)
+@handler.add(MessageEvent, message=StickerMessage)
 def handle_sticker_message(event):
     print("package_id:", event.message.package_id)
     print("sticker_id:", event.message.sticker_id)
