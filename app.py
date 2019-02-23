@@ -13,6 +13,8 @@ from linebot.exceptions import (
 from linebot.models import *
 
 app = Flask(__name__)
+config = configparser.ConfigParser()
+config.read("config.ini")
 
 # Channel Access Token
 line_bot_api = LineBotApi('06kc7waJVq9BYlHa+NNFSErsNYBKfbNti3zZByetNA0sUmzGks4+vOZ1ID0Sgg0vdOfCjKrAweEJWbO1LGf6uqbFqX7j+wEGy6/cOtfRdQz8GEzk9dKC2ixu8lY3UHBZVMYQjSM5r8ZJM82GxSWspQdB04t89/1O/w1cDnyilFU=')
@@ -74,6 +76,18 @@ def handle_message(event):
                 )
             )
         line_bot_api.reply_message(event.reply_token, buttons_template)
+        return 0
+    if text == "基本訊息":
+        reply_text = "Jessi"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text =reply_text))
+        return 0
+    if text == "工作經驗":
+        reply_text = "NCCU"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text= reply_text))
+        return 0
+    if text == "技能專長":
+        reply_text = "C"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text= reply_text))
         return 0
 
 import os
