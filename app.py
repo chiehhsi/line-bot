@@ -87,7 +87,7 @@ def handle_message(event):
     print("event.message.text:", event.message.text)
     text = event.message.text
 
-carousel_template_message = TemplateSendMessage(
+    carousel_template_message = TemplateSendMessage(
         alt_text = '目錄 template',
         template = CarouselTemplate(
             columns = [
