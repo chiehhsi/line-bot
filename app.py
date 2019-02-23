@@ -2,7 +2,7 @@ import requests
 import re
 import random
 import configparser
-import beautifulsoup4
+from bs4 import BeautifulSoup
 from flask import Flask, request, abort
 from imgurpython import ImgurClient
 
