@@ -151,52 +151,52 @@ def handle_message(event):
                     )
                 )
         line_bot_api.reply_message(event.reply_token, buttons_template)
-
-    carousel_template_message = TemplateSendMessage(
-        alt_text = '目錄 template',
-        template = CarouselTemplate(
-            columns = [
-                CarouselColumn(
-                    title = 'Chatbot會做的事',
-                    text = 'Check it out',
-                    actions = [
-                        MessageAction(
-                            label ='介紹Jessi',
-                            text='介紹Jessi'
+    else :
+        carousel_template_message = TemplateSendMessage(
+                alt_text = '目錄 template',
+                template = CarouselTemplate(
+                    columns = [
+                        CarouselColumn(
+                            title = 'Chatbot會做的事',
+                            text = 'Check it out',
+                            actions = [
+                                MessageAction(
+                                    label ='介紹Jessi',
+                                    text='介紹Jessi'
+                                    ),
+                                MessageAction(
+                                    label ='我想看廢文',
+                                    text= '我想看廢文'
+                                    ),
+                                MessageAction(
+                                    label = '我想看電影',
+                                    text = '我想看電影'
+                                    ),
+                                ]
                             ),
-                        MessageAction(
-                            label ='我想看廢文',
-                            text= '我想看廢文'
-                            ),
-                        MessageAction(
-                            label = '我想看電影',
-                            text = '我想看電影'
-                            ),
-                        ]
-                    ),
-                CarouselColumn(
-                    title = 'Chatbot 說說話',
-                    text = '想對我說什麼',
-                    actions = [
-                        MessageAction(
-                            label = '你喜歡做什麼',
-                            text = '你喜歡做什麼'
-                            ),
-                        MessageAction(
-                            label = '你好無聊',
-                            text = '你好無聊'
-                            ),
-                        MessageAction(
-                            label = 'Bye',
-                            text = 'Bye'
-                            ),
+                        CarouselColumn(
+                            title = 'Chatbot 說說話',
+                            text = '想對我說什麼',
+                            actions = [
+                                MessageAction(
+                                    label = '你喜歡做什麼',
+                                    text = '你喜歡做什麼'
+                                    ),
+                                MessageAction(
+                                    label = '你好無聊',
+                                    text = '你好無聊'
+                                    ),
+                                MessageAction(
+                                    label = 'Bye',
+                                    text = 'Bye'
+                                    ),
+                                ]
+                            )
                         ]
                     )
-                ]
-            )
-       )
+                )
 
-@handler.add(MessageEvent, message=StickerMessage)
+        @handler.add(MessageEvent, message=StickerMessage)
 def handle_sticker_message(event):
     print("package_id:", event.message.package_id)
     print("sticker_id:", event.message.sticker_id)
