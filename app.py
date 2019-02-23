@@ -46,12 +46,13 @@ def handle_message(event):
     text = event.message.text
     if text == "Hi":
         reply_text = "Hello"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text="Hello"))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_text))
         buttons_template = TemplateSendMessage(
                 alt_text = 'Self_intro template',
                 template = ButtonsTemplate(
                     title ='Something about Jessi'
                     text = 'check it out'
+                    thumbnail_image_url ='https://i.imgur.com/xQF5dZT.jpg'
                     actions = [
                         MessageTemplateAction(
                             label = '基本訊息'
@@ -70,14 +71,10 @@ def handle_message(event):
                             text = '興趣'
                         ),
                         ]
-                    )
                 )
+            )
         line_bot_api.reply_message(event.reply_token, buttons_template)
         return 0
-    ##else:
-    #    message = TextSendMessage(text=event.message.text)
-
-    #line_bot_api.reply_message(event.reply_token, message)
 
 import os
 if __name__ == "__main__":
