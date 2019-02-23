@@ -52,7 +52,7 @@ def handle_message(event):
                 template = ButtonsTemplate(
                     title ='Something about Jessi',
                     text = 'check it out',
-                    thumbnail_image_url ='https://i.imgur.com/xQF5dZT.jpg'
+                    thumbnail_image_url ='https://i.imgur.com/xQF5dZT.jpg',
                     actions = [
                         MessageTemplateAction(
                             label = '基本訊息',
