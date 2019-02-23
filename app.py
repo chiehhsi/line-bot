@@ -87,6 +87,71 @@ def handle_message(event):
     print("event.message.text:", event.message.text)
     text = event.message.text
 
+#Profile photo
+    if text == "What does Jessi Looks Like":
+        image_message = ImageSendMessage(original_content_url='https://imgur.com/OZ7vuKO', preview_image_url= 'https://imgur.com/OZ7vuKO')
+        line_bot_api.reply_message(event.reply_token, image_message)
+
+#Profile info
+    if text == "Jessi是誰":
+        content = "林倢希\n 國立政治大學 資訊科學系四年級\n Email:j4500123@gmail.com\n 電話:0975241136"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=content))
+
+#Work Experience
+    if text == "Jessi的經驗":
+        content = "[富邦證券]\n 電子交易科 股票分析預測實習生\n 2018.02-2018.06\n Github: https://github.com/chiehhsi/Tensorflow/blob/master/TSMC-co.ipynb\n [丹麥交換]\n AARHUS UNIVERSITY\n 2018.08-2019.01"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text= content))
+
+#Skills        
+    if text == "Jessi的技能":
+        reply_text = "[中文] 精通\n [英文] 精通\n [韓文] 良好"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text= reply_text))
+
+    if text == "你喜歡做什麼":
+        reply_text = "玩..玩..還是玩"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_text))
+    if text == "你好無聊":
+        reply_text = "沒辦法, 做我的人只會這樣"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_text))
+    if text == "Bye":
+        line_bot_api.reply_message(event.reply_token, StickerSendMessage(package_id=1, sticker_id=408))
+
+    if text == "我想看電影":
+        content = movie()
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=content))
+    if text == "我想看廢文":
+        content = ptt_hot()
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=content))
+#Introduce Jessi
+    if text == "介紹Jessi":
+        buttons_template = TemplateSendMessage(
+                alt_text = 'Self_intro template',
+                template = ButtonsTemplate(
+                    title ='Something about Jessi',
+                    text = 'Check it out',
+                    thumbnail_image_url='https://i.imgur.com/xQF5dZT.jpg',
+                    actions = [
+                        MessageTemplateAction(
+                            label = 'What does Jessi Look Like',
+                            text = 'What does Jessi Look Like'
+                            ),
+                        MessageTemplateAction(
+                            label = 'Jessi是誰',
+                            text = 'Jessi是誰'
+                            ),
+                        MessageTemplateAction(
+                            label = 'Jessi的經驗',
+                            text = 'Jessi的經驗'
+                            ),
+                        MessageTemplateAction(
+                            label = 'Jessi的技能',
+                            text = 'Jessi的技能'
+                            ),
+                        ]
+                    )
+                )
+        line_bot_api.reply_message(event.reply_token, buttons_template)
+
     carousel_template_message = TemplateSendMessage(
         alt_text = '目錄 template',
         template = CarouselTemplate(
@@ -129,71 +194,7 @@ def handle_message(event):
                     )
                 ]
             )
-        )
-#Profile photo
-    if text == "How do Jessi Look":
-        image_message = ImageSendMessage(original_content_url='https://imgur.com/OZ7vuKO', preview_image_url= 'https://imgur.com/OZ7vuKO')
-        line_bot_api.reply_message(event.reply_token, image_message)
-
-#Profile info
-    if text == "Jessi是誰":
-        content = "林倢希\n 國立政治大學 資訊科學系四年級\n Email:j4500123@gmail.com\n 電話:0975241136"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=content))
-
-#Work Experience
-    if text == "Jessi的經驗":
-        content = "[富邦證券]\n 電子交易科 股票分析預測實習生\n 2018.02-2018.06\n Github: https://github.com/chiehhsi/Tensorflow/blob/master/TSMC-co.ipynb\n [丹麥交換]\n AARHUS UNIVERSITY\n 2018.08-2019.01"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text= content))
-
-#Skills        
-    if text == "Jessi的技能":
-        reply_text = "[中文] 精通\n [英文] 精通\n [韓文] 良好"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text= reply_text))
-
-    if text == "你喜歡做什麼":
-        reply_text = "玩..玩..還是玩"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_text))
-    if text == "你好無聊":
-        reply_text = "沒辦法, 做我的人只會這樣"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_text))
-    if text == "Bye":
-        line_bot_api.reply_message(event.reply_token, StickerSendMessage(package_id=1, sticker_id=408))
-
-    if event.message.text == "我想看電影":
-        content = movie()
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=content))
-    if event.message.text == "我想看廢文":
-        content = ptt_hot()
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=content))
-#Introduce Jessi
-    if text == "介紹Jessi":
-        buttons_template = TemplateSendMessage(
-                alt_text = 'Self_intro template',
-                template = ButtonsTemplate(
-                    title ='Something about Jessi',
-                    text = 'Check it out',
-                    thumbnail_image_url='https://i.imgur.com/xQF5dZT.jpg',
-                    actions = [
-                        MessageTemplateAction(
-                            label = 'How do Jessi Look',
-                            text = 'How do Jessi Look'
-                            ),
-                        MessageTemplateAction(
-                            label = 'Jessi是誰',
-                            text = 'Jessi是誰'
-                            ),
-                        MessageTemplateAction(
-                            label = 'Jessi的經驗',
-                            text = 'Jessi的經驗'
-                            ),
-                        MessageTemplateAction(
-                            label = 'Jessi的技能',
-                            text = 'Jessi的技能'
-                            ),
-                        ]
-                    )
-                )
-        line_bot_api.reply_message(event.reply_token, buttons_template)
+       )
 
 @handler.add(MessageEvent, message=StickerMessage)
 def handle_sticker_message(event):
