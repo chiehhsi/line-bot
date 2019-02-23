@@ -53,7 +53,7 @@ def handle_message(event):
 
 #Profile photo
     if text == "How do Jessi Look":
-        image_message = ImageSendMessage(original_content_url='https://drive.google.com/file/d/1TtCrL2qUuiKX1_Dpy6tkF_FLvcdXiXis/view?usp=sharing', preview_content_url= 'https://drive.google.com/file/d/1TtCrL2qUuiKX1_Dpy6tkF_FLvcdXiXis/view?usp=sharing')
+        image_message = ImageSendMessage(original_content_url='https://imgur.com/OZ7vuKO', preview_content_url= 'https://imgur.com/OZ7vuKO')
         line_bot_api.reply_message(event.reply_token, image_message)
 
 #Profile info
