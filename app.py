@@ -76,19 +76,19 @@ def handle_message(event):
                 )
             )
         line_bot_api.reply_message(event.reply_token, buttons_template)
-        return 0
+
     if text == "基本訊息":
         reply_text = "Jessi"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text =reply_text))
-        return 0
+        
     if text == "工作經驗":
         reply_text = "NCCU"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text= reply_text))
-        return 0
+        
     if text == "技能專長":
         reply_text = "C"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text= reply_text))
-        return 0
+        
 
 import os
 if __name__ == "__main__":
