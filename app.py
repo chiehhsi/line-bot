@@ -71,7 +71,7 @@ def handle_message(event):
         reply_text = "[中文] 精通\n [英文] 精通\n [韓文] 良好\n"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text= reply_text))
 
-    if text == "Thank you"||"Thanks" :
+    if text == "Thank you":
         reply_text = "Tell me if you want to know about Jessi"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_text))
     if text == "Bye":
