@@ -80,6 +80,7 @@ def ptt_hot():
         if data.find('a')['href'] == "796-59l9":
             break
         content += '{}\n{}\n\n'.format(title, link)
+        index ++
     return content
 
 # 處理訊息
