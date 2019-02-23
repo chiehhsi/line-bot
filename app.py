@@ -58,13 +58,13 @@ def handle_message(event):
 
 #Profile info
     if text == "Jessi是誰":
-        content = "林倢希\n 國立政治大學 資訊科學系四年級\n Email:j4500123@gmail.com\n 電話:0975241136"
+        content = "林倢希%0D%0A 國立政治大學 資訊科學系四年級%0D%0A Email:j4500123@gmail.com%0D%0A電話:0975241136"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=content))
 
 #Work Experience
 if text == "Jessi的經驗":
     content = works()
-        reply_text = "[富邦證券]\n 電子交易科 股票分析預測實習生\n 2018.02-2018.06\n Github: https://github.com/chiehhsi/Tensorflow/blob/master/TSMC-co.ipynb\n [丹麥交換]\n AARHUS UNIVERSITY\n 2018.08-2019.01"
+        reply_text = "[富邦證券] %0D%0A 電子交易科 股票分析預測實習生%0D%0A 2018.02-2018.06%0D%0A Github: https://github.com/chiehhsi/Tensorflow/blob/master/TSMC-co.ipynb %0D%0A [丹麥交換]%0D%0A AARHUS UNIVERSITY%0D%0A2018.08-2019.01"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text= reply_text))
 
 #Skills        
