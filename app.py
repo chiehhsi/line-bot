@@ -52,7 +52,21 @@ def handle_message(event):
     text = event.message.text
        ##reply_text = "Hello"
         ##line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_text))
-    buttons_template = TemplateSendMessage(
+
+    if text == "基本訊息":
+        content =  profile()
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=content))
+        
+    if text == "工作經驗":
+        reply_text = "NCCU"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text= reply_text))
+        
+    if text == "技能專長":
+        reply_text = "C"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text= reply_text))
+    
+    else:
+        buttons_template = TemplateSendMessage(
                 alt_text = 'Self_intro template',
                 template = ButtonsTemplate(
                     title ='Something about Jessi',
@@ -77,20 +91,7 @@ def handle_message(event):
                         ]
                 )
             )
-    line_bot_api.reply_message(event.reply_token, buttons_template)
-
-    if text == "基本訊息":
-        content =  profile()
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=content))
-        
-    if text == "工作經驗":
-        reply_text = "NCCU"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text= reply_text))
-        
-    if text == "技能專長":
-        reply_text = "C"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text= reply_text))
-        
+        line_bot_api.reply_message(event.reply_token, buttons_template)
 
 import os
 if __name__ == "__main__":
