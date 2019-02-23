@@ -2,7 +2,9 @@ import requests
 import re
 import random
 import configparser
+from bs4 import BeautifulSoup
 from flask import Flask, request, abort
+from imgurpython import ImgurClient
 
 from linebot import (
         LineBotApi, WebhookHandler
@@ -15,6 +17,13 @@ from linebot.models import *
 app = Flask(__name__)
 config = configparser.ConfigParser()
 config.read("config.ini")
+
+# imgur key
+client_id = '8f7088d3788e5cf'
+client_secret = '864e69cc013de5f77e1acfa018c07bed04cc5e32'
+album_id = 'YOUR_IMGUR_ALBUM_ID'
+access_token = 'YOUR_IMGUR_ACCESS_TOKEN'
+refresh_token = 'YOUR_IMGUR_ACCESS_TOKEN'
 
 # Channel Access Token
 line_bot_api = LineBotApi('06kc7waJVq9BYlHa+NNFSErsNYBKfbNti3zZByetNA0sUmzGks4+vOZ1ID0Sgg0vdOfCjKrAweEJWbO1LGf6uqbFqX7j+wEGy6/cOtfRdQz8GEzk9dKC2ixu8lY3UHBZVMYQjSM5r8ZJM82GxSWspQdB04t89/1O/w1cDnyilFU=')
@@ -39,9 +48,36 @@ def callback():
     except InvalidSignatureError:
         abort(400)
     return 'OK'
-def profile():
 
-    content = "Jessi"
+def movie():
+    target_url = 'http://www.atmovies.com.tw/movie/next/0/'
+    print('Start parsing movie ...')
+    rs = requests.session()
+    res = rs.get(target_url, verify=False)
+    res.encoding = 'utf-8'
+    soup = BeautifulSoup(res.text, 'html.parser')
+    content = ""
+    for index, data in enumerate(soup.select('ul.filmNextListAll a')):
+        if index == 3:
+            return content
+        title = data.text.replace('\t', '').replace('\r', '')
+        link = "http://www.atmovies.com.tw" + data['href']
+        content += '{}\n{}\n'.format(title, link)
+    return content
+
+def ptt_hot():
+    target_url = 'http://disp.cc/b/PttHot'
+    print('Start parsing pttHot....')
+    rs = requests.session()
+    res = rs.get(target_url, verify=False)
+    soup = BeautifulSoup(res.text, 'html.parser')
+    content = ""
+    for data in soup.select('#list div.row2 div span.listTitle'):
+        title = data.text
+        link = "http://disp.cc/b/" + data.find('a')['href']
+        if data.find('a')['href'] == "796-59l9":
+            break
+        content += '{}\n{}\n\n'.format(title, link)
     return content
 
 # 處理訊息
@@ -51,6 +87,49 @@ def handle_message(event):
     print("event.message.text:", event.message.text)
     text = event.message.text
 
+carousel_template_message = TemplateSendMessage(
+        alt_text = '目錄 template',
+        template = CarouselTemplate(
+            columns = [
+                CarouselColumn(
+                    title = 'Chatbot會做的事',
+                    text = 'Check it out',
+                    actions = [
+                        MessageAction(
+                            label ='介紹Jessi',
+                            text='介紹Jessi'
+                            ),
+                        MessageAction(
+                            label ='我想看廢文',
+                            text= '我想看廢文'
+                            ),
+                        MessageAction(
+                            label = '我想看電影',
+                            text = '我想看電影'
+                            ),
+                        ]
+                    ),
+                CarouselColumn(
+                    title = 'Chatbot 說說話',
+                    text = '想對我說什麼',
+                    actions = [
+                        MessageAction(
+                            label = '你喜歡做什麼',
+                            text = '你喜歡做什麼'
+                            ),
+                        MessageAction(
+                            label = '你好無聊',
+                            text = '你好無聊'
+                            ),
+                        MessageAction(
+                            label = 'Bye',
+                            text = 'Bye'
+                            ),
+                        ]
+                    )
+                ]
+            )
+        )
 #Profile photo
     if text == "How do Jessi Look":
         image_message = ImageSendMessage(original_content_url='https://imgur.com/OZ7vuKO', preview_image_url= 'https://imgur.com/OZ7vuKO')
@@ -71,13 +150,23 @@ def handle_message(event):
         reply_text = "[中文] 精通\n [英文] 精通\n [韓文] 良好"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text= reply_text))
 
-    if text == "Thank you":
-        reply_text = "Tell me if you want to know about Jessi!"
+    if text == "你喜歡做什麼":
+        reply_text = "玩..玩..還是玩"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_text))
+    if text == "你好無聊":
+        reply_text = "沒辦法, 做我的人只會這樣"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_text))
     if text == "Bye":
         line_bot_api.reply_message(event.reply_token, StickerSendMessage(package_id=1, sticker_id=408))
 
-    else:
+    if event.message.text == "我想看電影":
+        content = movie()
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=content))
+    if event.message.text == "我想看廢文":
+        content = ptt_hot()
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=content))
+#Introduce Jessi
+    if text == "介紹Jessi":
         buttons_template = TemplateSendMessage(
                 alt_text = 'Self_intro template',
                 template = ButtonsTemplate(
