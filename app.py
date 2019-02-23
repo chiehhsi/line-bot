@@ -19,11 +19,11 @@ config = configparser.ConfigParser()
 config.read("config.ini")
 
 # imgur key
-client_id = '8f7088d3788e5cf'
-client_secret = '864e69cc013de5f77e1acfa018c07bed04cc5e32'
-album_id = 'YOUR_IMGUR_ALBUM_ID'
-access_token = 'YOUR_IMGUR_ACCESS_TOKEN'
-refresh_token = 'YOUR_IMGUR_ACCESS_TOKEN'
+#client_id = '8f7088d3788e5cf'
+#client_secret = '864e69cc013de5f77e1acfa018c07bed04cc5e32'
+#album_id = 'YOUR_IMGUR_ALBUM_ID'
+#access_token = 'YOUR_IMGUR_ACCESS_TOKEN'
+#refresh_token = 'YOUR_IMGUR_ACCESS_TOKEN'
 
 # Channel Access Token
 line_bot_api = LineBotApi('06kc7waJVq9BYlHa+NNFSErsNYBKfbNti3zZByetNA0sUmzGks4+vOZ1ID0Sgg0vdOfCjKrAweEJWbO1LGf6uqbFqX7j+wEGy6/cOtfRdQz8GEzk9dKC2ixu8lY3UHBZVMYQjSM5r8ZJM82GxSWspQdB04t89/1O/w1cDnyilFU=')
@@ -195,6 +195,7 @@ def handle_message(event):
                         ]
                     )
                 )
+        line_bot_api.reply_message(event.reply_token, carousel_template_message)
 
 @handler.add(MessageEvent, message=StickerMessage)
 def handle_sticker_message(event):
