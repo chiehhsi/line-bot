@@ -46,10 +46,9 @@ def handle_message(event):
     print("event.reply_token:", event.reply_token)
     print("event.message.text:", event.message.text)
     text = event.message.text
-    if text == "Hi":
        ##reply_text = "Hello"
         ##line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_text))
-        buttons_template = TemplateSendMessage(
+    buttons_template = TemplateSendMessage(
                 alt_text = 'Self_intro template',
                 template = ButtonsTemplate(
                     title ='Something about Jessi',
@@ -74,7 +73,7 @@ def handle_message(event):
                         ]
                 )
             )
-        line_bot_api.reply_message(event.reply_token, buttons_template)
+    line_bot_api.reply_message(event.reply_token, buttons_template)
 
     if text == "基本訊息":
         reply_text = "Jessi"
