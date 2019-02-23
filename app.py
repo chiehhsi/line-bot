@@ -1,3 +1,7 @@
+import requests
+import re
+import random
+import configparser
 from flask import Flask, request, abort
 
 from linebot import (
@@ -37,7 +41,13 @@ def callback():
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    message = TextSendMessage(text=event.message.text)
+    print("event.reply_token:", event.reply_token)
+    print("event.message.text:", event.message.text)
+    if event.message.text == "Hi":
+        message ="Hello"
+    else:
+        message = TextSendMessage(text=event.message.text)
+
     line_bot_api.reply_message(event.reply_token, message)
 
 import os
