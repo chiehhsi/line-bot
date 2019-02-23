@@ -57,6 +57,7 @@ def movie():
     res.encoding = 'utf-8'
     soup = BeautifulSoup(res.text, 'html.parser')
     content = ""
+    index =0
     for index, data in enumerate(soup.select('ul.filmNextListAll a')):
         if index == 3:
             return content
