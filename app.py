@@ -76,7 +76,7 @@ def ptt_hot():
     for data in soup.select('#list div.row2 div span.listTitle'):
         title = data.text
         link = "http://disp.cc/b/" + data.find('a')['href']
-        if content.count() == 3:
+        if content.count('title') == 3:
             return content
         if data.find('a')['href'] == "796-59l9":
             break
