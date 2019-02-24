@@ -101,7 +101,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text= reply_text))
 
     if text == "你喜歡做什麼":
-        reply_text = "玩..玩..還是玩"
+        reply_text = "發呆、思考人生"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_text))
     if text == "你好無聊":
         reply_text = "沒辦法, 做我的人只會這樣"
@@ -142,6 +142,7 @@ def handle_message(event):
                 )
         line_bot_api.reply_message(event.reply_token, buttons_template)
 
+# Main Contents
     else :
         carousel_template_message = TemplateSendMessage(
                 alt_text = '目錄 template',
@@ -188,6 +189,7 @@ def handle_message(event):
                 )
         line_bot_api.reply_message(event.reply_token, carousel_template_message)
 
+# 貼圖處理
 @handler.add(MessageEvent, message=StickerMessage)
 def handle_sticker_message(event):
     print("package_id:", event.message.package_id)
