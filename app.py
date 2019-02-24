@@ -18,13 +18,6 @@ app = Flask(__name__)
 config = configparser.ConfigParser()
 config.read("config.ini")
 
-# imgur key
-#client_id = '8f7088d3788e5cf'
-#client_secret = '864e69cc013de5f77e1acfa018c07bed04cc5e32'
-#album_id = 'YOUR_IMGUR_ALBUM_ID'
-#access_token = 'YOUR_IMGUR_ACCESS_TOKEN'
-#refresh_token = 'YOUR_IMGUR_ACCESS_TOKEN'
-
 # Channel Access Token
 line_bot_api = LineBotApi('06kc7waJVq9BYlHa+NNFSErsNYBKfbNti3zZByetNA0sUmzGks4+vOZ1ID0Sgg0vdOfCjKrAweEJWbO1LGf6uqbFqX7j+wEGy6/cOtfRdQz8GEzk9dKC2ixu8lY3UHBZVMYQjSM5r8ZJM82GxSWspQdB04t89/1O/w1cDnyilFU=')
 # Channel Secret
@@ -92,11 +85,6 @@ def handle_message(event):
     print("event.message.text:", event.message.text)
     text = event.message.text
 
-#Profile photo
-    if text == "Jessi Looks Like":
-        image_message = ImageSendMessage(original_content_url='https://imgur.com/OZ7vuKO', preview_image_url= 'https://imgur.com/OZ7vuKO')
-        line_bot_api.reply_message(event.reply_token, image_message)
-
 #Profile info
     if text == "Jessi是誰":
         content = "林倢希\n 國立政治大學 資訊科學系四年級\n Email:j4500123@gmail.com\n 電話:0975241136"
@@ -137,10 +125,6 @@ def handle_message(event):
                     text = 'All I know',
                     thumbnail_image_url='https://i.imgur.com/xQF5dZT.jpg',
                     actions = [
-                        MessageTemplateAction(
-                            label = 'Jessi Looks Like',
-                            text = 'Jessi Looks Like'
-                            ),
                         MessageTemplateAction(
                             label = 'Jessi是誰',
                             text = 'Jessi是誰'
