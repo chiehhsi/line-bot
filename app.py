@@ -104,7 +104,7 @@ def handle_message(event):
         reply_text = "發呆、思考人生"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_text))
     if text == "你好無聊":
-        reply_text = "沒辦法, 做我的人只會這樣"
+        reply_text = "沒辦法, 製造我的人就是個無聊的人"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_text))
     if text == "Bye":
         line_bot_api.reply_message(event.reply_token, StickerSendMessage(package_id=1, sticker_id=408))
