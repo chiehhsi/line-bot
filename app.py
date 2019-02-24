@@ -73,13 +73,15 @@ def ptt_hot():
     res = rs.get(target_url, verify=False)
     soup = BeautifulSoup(res.text, 'html.parser')
     content = ""
+    index =0
     for data in soup.select('#list div.row2 div span.listTitle'):
         title = data.text
         link = "http://disp.cc/b/" + data.find('a')['href']
-        if content.count(link) == 3:
-            return content
+        if index == 3:
+            break
         if data.find('a')['href'] == "796-59l9":
             break
+        index = index+1
         content += '{}\n{}\n\n'.format(title, link)
     return content
 
