@@ -1,8 +1,10 @@
-# line-bot
+# Line-bot
 Jessi 的 Chatbot
 
-## 我的QRcode
+<img src="https://github.com/chiehhsi/line-bot/blob/master/pic/screenshot.PNG" width="50%" height="50%">
 
+## 我的QRcode
+<img src="https://github.com/chiehhsi/line-bot/blob/master/pic/QRcode.png" width="25%" height="25%">
 
 ## 可執行的功能
 * 介紹Jessi
