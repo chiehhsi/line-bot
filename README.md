@@ -8,6 +8,7 @@ The work aims at implementing API of LINE with introduction of myself and simple
 
 ## My QRcode
 Using LINE app and scan the QRcode below to use the linebot
+
 <img src="https://github.com/chiehhsi/line-bot/blob/master/pic/QRcode.png" width="25%" height="25%">
 
 ## Functions
